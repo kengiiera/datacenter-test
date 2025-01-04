@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title><ui:insert name="title">Recargas</ui:insert></title>
+    <style>
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        .user-info {
+            margin-right: 20px;
+            font-size: 16px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .content {
+            margin-top: 60px;
+            padding: 20px;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="navbar">
+
+        <div>
+            <a href="recharge.xhtml">Realizar Recarga</a>
+            <a href="statistics.xhtml">Ver Estadísticas</a>
+        </div>
+
+        <div class="user-info">
+            <span>Bienvenido, #{sessionScope.username}</span>
+            <h:form>
+                <h:commandButton value="Cerrar Sesión" action="#{loginBean.logout}" 
+                                 styleClass="logout-btn" />
+            </h:form>
+        </div>
+    </div>
+
+    <div class="content">
+        <ui:insert name="content"></ui:insert>
+    </div>
+</h:body>
+</html>

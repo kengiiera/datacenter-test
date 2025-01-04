@@ -1,0 +1,54 @@
+<ui:composition template="dashboard.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="title">Estadísticas</ui:define>
+    <ui:define name="content">
+
+<h:body>
+    <h:form>
+        <h1>Estadísticas por Operador</h1>
+        <p:dataTable value="#{statisticsBean.byOperator}" var="stat" 
+                     paginator="true" rows="10" 
+                     filterBy="#{stat.name}" styleClass="statistics-table">
+            <!-- Columna: Operador -->
+            <p:column headerText="Operador" filterBy="#{stat.name}" filterMatchMode="contains">
+                <h:outputText value="#{stat.name}" />
+            </p:column>
+            
+            <!-- Columna: Cantidad de Recargas -->
+            <p:column headerText="Cantidad de Recargas">
+                <h:outputText value="#{stat.totalCount}" />
+            </p:column>
+            
+            <!-- Columna: Monto Total -->
+            <p:column headerText="Monto Total">
+                <h:outputText value="#{stat.totalAmount}" />
+            </p:column>
+        </p:dataTable>
+
+        <h1>Estadísticas por Vendedor</h1>
+        <p:dataTable value="#{statisticsBean.bySeller}" var="stat" 
+                     paginator="true" rows="10" 
+                     filterBy="#{stat.name}" styleClass="statistics-table">
+            <!-- Columna: Vendedor -->
+            <p:column headerText="Vendedor" filterBy="#{stat.name}" filterMatchMode="contains">
+                <h:outputText value="#{stat.name}" />
+            </p:column>
+            
+            <!-- Columna: Cantidad de Recargas -->
+            <p:column headerText="Cantidad de Recargas">
+                <h:outputText value="#{stat.totalCount}" />
+            </p:column>
+            
+            <!-- Columna: Monto Total -->
+            <p:column headerText="Monto Total">
+                <h:outputText value="#{stat.totalAmount}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+    </ui:define>
+</ui:composition>
+

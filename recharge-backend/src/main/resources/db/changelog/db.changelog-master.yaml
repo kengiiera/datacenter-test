@@ -1,0 +1,104 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: dev
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: dev
+      changes:
+        - createTable:
+            tableName: recharges
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: operator
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username_seller
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_user_seller
+            baseTableName: recharges
+            baseColumnNames: username_seller
+            referencedTableName: users
+            referencedColumnNames: username
+
+  # Nuevo changeSet para insertar usuarios iniciales
+  - changeSet:
+      id: 3
+      author: dev
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "vendedor1"
+              - column:
+                  name: password
+                  value: "$2a$10$Dow1JxVhX.njVJq9jYKxcOlf/dZ3/fJtkeEywP8J8XzKPIvV/YZ1G" # Contraseña encriptada para 'password1'
+              - column:
+                  name: role
+                  value: "ROLE_USER"
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "admin"
+              - column:
+                  name: password
+                  value: "$2a$10$Hjzq6UjzRg35HT1h/q9nSeJ6p5IikD.dN4U6uHR1kGVr8rj1/5miK" # Contraseña encriptada para 'password2'
+              - column:
+                  name: role
+                  value: "ROLE_ADMIN"
